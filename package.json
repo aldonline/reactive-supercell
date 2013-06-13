@@ -1,6 +1,6 @@
 {
   "name": "radioactive-supercell",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "radioactive-supercell",
   "author": "Aldo Bucchi <aldo.bucchi@gmail.com>",
   "main": "lib/supercell.js",
