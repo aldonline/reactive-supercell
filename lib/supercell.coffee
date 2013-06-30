@@ -1,4 +1,4 @@
-cell = require 'notifying-cell'
+cell = require 'reactive-cell'
 
 class InvalidValueError extends Error
 

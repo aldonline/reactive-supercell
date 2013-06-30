@@ -1,7 +1,7 @@
 {
-  "name": "notifying-supercell",
+  "name": "reactive-supercell",
   "version": "0.0.1",
-  "description": "notifying-supercell",
+  "description": "",
   "author": "Aldo Bucchi <aldo.bucchi@gmail.com>",
   "main": "lib/supercell.js",
   "scripts": {
@@ -18,6 +18,6 @@
   },
   "repository": "",
   "dependencies": {
-    "notifying-cell": "0.0.7"
+    "reactive-cell": "0.0.8"
   }
 }
