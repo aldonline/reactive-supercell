@@ -2,6 +2,12 @@ cell = require 'reactive-cell'
 
 class InvalidValueError extends Error
 
+get_cell_value = ( c ) ->
+  try
+    c()
+  catch e
+    e
+
 ###
 opts =
   type: 'string', '...'
@@ -68,7 +74,7 @@ supercell = ( opts ) ->
         inner_cell new_value
       else
         # check for equality
-        unless compare inner_cell.value(), new_value, { type:type, equals: equals }
+        unless compare get_cell_value(inner_cell), new_value, { type:type, equals: equals }
           if new_value?
             # run type based validator
             try
@@ -84,9 +90,7 @@ supercell = ( opts ) ->
   # initialize to value if passed
   if has_init then f init
 
-  # surface decorated instance methods
-  f.view = -> inner_cell.view()
-  f.value     = -> inner_cell.value()
+  f.immutable = -> inner_cell.immutable()
 
   # and some more...
   f.type      = -> type
