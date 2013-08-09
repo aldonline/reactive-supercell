@@ -18,6 +18,6 @@
   },
   "repository": "",
   "dependencies": {
-    "reactive-cell": "0.1.2"
+    "reactive-cell": "~0.2.0"
   }
 }
