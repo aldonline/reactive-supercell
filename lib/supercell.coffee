@@ -1,4 +1,5 @@
 cell = require 'reactive-cell'
+pvalue = require './persisted_value'
 
 class InvalidValueError extends Error
 
@@ -19,7 +20,11 @@ opts =
 
     # if a cell is strict it will throw an error when setting a value
     # otherwise it is only thrown when reading the value
-  strict: false 
+  strict: false
+
+  persist: 'key'
+  read: (str) -> # defaults to JSON.stringify
+  write: (value) -> # default to JSON.parse
                 
 ###
 supercell = ( opts ) ->
@@ -28,6 +33,16 @@ supercell = ( opts ) ->
     opts = type: null, nullable: yes
   else
     opts = opts # cell( ... )
+
+  persisted = null
+  do ->
+    if ( k = opts.persist )?
+      persisted = pvalue
+        key: opts.persist
+        read: opts.read
+        write: opts.write
+      if ( v = persisted() )?
+        opts.init = v # initialize to persisted value if present
 
   # since NULL or undefined are valid initial values in some cases
   # we check for presence of init property by iterating over object keys
@@ -68,10 +83,12 @@ supercell = ( opts ) ->
       unless new_value?
         if nullable
           inner_cell new_value
+          persisted? new_value
         else
           inner_cell new InvalidValueError 'NULL in a non-nullable cell'
       else if new_value instanceof Error
         inner_cell new_value
+        persisted? new_value
       else
         # check for equality
         unless compare get_cell_value(inner_cell), new_value, { type:type, equals: equals }
@@ -84,6 +101,7 @@ supercell = ( opts ) ->
               new_value = e
           # store value
           inner_cell new_value
+          persisted? new_value
     else
       throw new Error 'Cell takes 0 or 1 parameters'
 
