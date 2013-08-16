@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "description": "",
   "author": "Aldo Bucchi <aldo.bucchi@gmail.com>",
-  "main": "lib/supercell.js",
+  "main": "lib/supercell",
   "scripts": {
     "test": "make test",
     "build": "coffee -c lib/",
