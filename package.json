@@ -1,6 +1,6 @@
 {
   "name": "reactive-supercell",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "description": "",
   "author": "Aldo Bucchi <aldo.bucchi@gmail.com>",
   "main": "lib/supercell",
